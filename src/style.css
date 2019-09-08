@@ -74,6 +74,11 @@ a {
     border-radius: 2px;
 }
 
+/* loader */
+
+.loading-area {
+    text-align: center;
+}
 
 /* results grid */
 
