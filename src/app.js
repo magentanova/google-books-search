@@ -18,7 +18,7 @@ const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 // ACTIONS
 const fetchBooks = query => {
     $(".results-area .results-message").innerHTML = "Loading...";
-    $("book-list").innerHTML = `<img src="/static/loader.gif" />`
+    $(".book-list").innerHTML = `<img src="/static/loader.gif" />`
     fetch(formatQueryURL(SEARCH_URL, query))
         .then(
             resp => resp.json(),
@@ -50,6 +50,10 @@ document.body.innerHTML = `
                 <button type="submit">Go</button>
             </form>
             <p class="error-message"></p>
+        </div>
+        <div class="loading-area" >
+            <p class="loading-message"></p>
+            <div class="loading-gif"></div>
         </div>
         <div class="results-area">
             <p class="results-message"></p>
