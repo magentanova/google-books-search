@@ -17,6 +17,7 @@ const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 
 // ACTIONS
 const fetchBooks = query => {
+    clearSearch();
     enterLoadingState();
     fetch(formatQueryURL(SEARCH_URL, query))
         .then(
@@ -72,6 +73,12 @@ const clearErrorState = () => {
 const clearLoadingState = () => {
     $(".loading-message").innerHTML = "";
     $(".loading-gif").innerHTML = "";
+}
+
+const clearSearch = () => {
+    $(".search-form .search-input").value = "";
+    $(".results-area .results-message").innerHTML = "";
+    $(".results-area .book-list").innerHTML = ""
 }
 
 const enterErrorState = () => {

@@ -28,16 +28,22 @@ const app = function(request, response) {
         if (match) {
             return
         }
-        // otherwise, if we match the middleware's corresponding method and 
-            // route pattern, invoke the callback
-        if (request.parsedPath.pathname.match(obj.pat)) {
-            // no method will be interpreted as "any method"
-            if (!obj.method || obj.method === request.method) {
-                obj.callback(request, response)
-                match = true
-            }            
-        }
+
+        obj.pat = obj.pat instanceof Array ? obj.pat : [obj.pat];
+
+        obj.pat.forEach(pat => {
+            // otherwise, if we match the middleware's corresponding method and 
+                // route pattern, invoke the callback
+            if (request.parsedPath.pathname.match(pat)) {
+                // no method will be interpreted as "any method"
+                if (!obj.method || obj.method === request.method) {
+                    obj.callback(request, response)
+                    match = true
+                }            
+            }
+        })
     })
+
     // if the path didn't match anything, send a 400
     if (!match) {
         response.sendError("no such page exists", 400);
@@ -54,8 +60,7 @@ app.use = function(callback, pat, method) {
     })
 }
 
-app.use(staticFileHandler, "^/$", "GET");
-app.use(staticFileHandler, "^/src", "GET");
+app.use(staticFileHandler, ["^/$", "^/src", "^/static"], "GET");
 app.use(bookSearchProxy, "^/book-search$", "GET");
 
 module.exports = app 
