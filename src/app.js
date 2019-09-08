@@ -17,15 +17,17 @@ const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 
 // ACTIONS
 const fetchBooks = query => {
-    $(".results-area .results-message").innerHTML = "Loading...";
-    $(".book-list").innerHTML = `<img src="/static/loader.gif" />`
+    enterLoadingState();
     fetch(formatQueryURL(SEARCH_URL, query))
         .then(
             resp => resp.json(),
             err => console.error("error reading response", err)
         )
         .then(
-            renderBooksResponse,
+            json =>{
+                clearLoadingState();
+                renderBooksResponse(json);
+            },
             err => console.error("error reading json", err)
         );
 }
@@ -67,9 +69,20 @@ const clearErrorState = () => {
     $(".search-form .search-input").classList.remove("error");
 }
 
+const clearLoadingState = () => {
+    $(".loading-message").innerHTML = "";
+    $(".loading-gif").innerHTML = "";
+}
+
 const enterErrorState = () => {
     $(".error-message").innerHTML  = "Please enter a search term."
     $(".search-form .search-input").classList.add("error");
+}
+
+const enterLoadingState = () => {
+    $(".search-input").value = "";
+    $(".loading-message").innerHTML = "Searching...";
+    $(".loading-gif").innerHTML = `<img src="/static/loader.gif" />`;
 }
 
 const handleFormSubmit = e => {
@@ -84,7 +97,7 @@ const handleFormSubmit = e => {
 
 const renderBooksResponse = json => {
     $(".results-area .results-message").innerHTML = renderResultsMessage(json.totalItems);
-    $(".book-list").innerHTML = json.items.map(renderBookItem).join("");    
+    $(".book-list").innerHTML = (json.items || []).map(renderBookItem).join("");    
 }
 
 const renderBookItem = bookObj => `
