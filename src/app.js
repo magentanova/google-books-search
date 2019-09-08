@@ -11,7 +11,7 @@ SEARCH_URL = "/book-search";
 
 // HELPERS / UTILS
 const $ = sel => document.querySelector(sel);
-const $$ = sel => document.querySelector(sel);
+const $$ = sel => document.querySelectorAll(sel);
 const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 
 
