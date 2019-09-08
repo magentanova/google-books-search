@@ -48,7 +48,12 @@ const handleFormSubmit = e => {
 }
 
 const renderBooksResponse = json => {
-    $(".book-list").innerHTML = json.items.map(renderBookItem).join("")
+    if (!json.totalItems) {
+        $(".book-list").innerHTML = renderNoResults();
+    }
+    else {
+        $(".book-list").innerHTML = json.items.map(renderBookItem).join("");    
+    }
 }
 
 const renderBookItem = bookObj => `
@@ -69,6 +74,10 @@ const renderBookItem = bookObj => `
         />
     </li>
 `
+
+const renderNoResults = () => `
+    <p class="no-results">No results found</p>
+`;
 
 // assign event listeners
 $(".search-form").addEventListener("submit", handleFormSubmit);
