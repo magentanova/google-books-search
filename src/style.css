@@ -7,3 +7,23 @@ body {
 h1, h2, h3 {
     font-family: "Rosarivo", 'Times New Roman', Times, serif;
 }
+
+input.error {
+    border: 2px solid crimson;
+    border-radius: 2px;
+}
+
+.header {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+.header h1 {
+    margin: 0;
+}
+
+
+
+.book-list {
+
+}

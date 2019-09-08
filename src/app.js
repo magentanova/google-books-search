@@ -32,19 +32,42 @@ const fetchBooks = query => {
 // (writing the document body here instead of in the index file so that the 
     // same html is created when requiring this module for testing)
 document.body.innerHTML = `
-    <h1>Welcome to The Library</h1>
-    <i>Shhh!</i>
-    <p>florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum </p>
-    <form class="search-form">
-        <input class="search-input" id="searchInput" name="searchInput" />
-        <button type="submit"></button>
-    </form>
-    <ul class="book-list"></ul>
+    <div class="header">
+        <h1>Welcome to The Library</h1>
+        <i>Shhh!</i>
+    </div>
+    <div class="page-body">
+        <form class="search-form">
+            <input 
+                class="search-input" 
+                id="searchInput" 
+                name="searchInput" 
+                placeholder="Enter a search term" />
+            <button type="submit"></button>
+            <p class="error-message"></p>
+        </form>
+        <ul class="book-list"></ul>
+    </div>
 `;
+
+const clearErrorState = () => {
+    $(".search-form .error-message").innerHTML = ""
+    $(".search-form .search-input").classList.remove("error");
+}
+
+const enterErrorState = () => {
+    $(".search-form .error-message").innerHTML  = "Please enter a search term."
+    $(".search-form .search-input").classList.add("error");
+}
 
 const handleFormSubmit = e => {
     e.preventDefault();
-    fetchBooks($("#searchInput").value);
+    const searchTerm = $(".search-input").value;
+    if (!searchTerm) {
+        enterErrorState()
+        return
+    }
+    fetchBooks(searchTerm);
 }
 
 const renderBooksResponse = json => {
@@ -58,20 +81,24 @@ const renderBooksResponse = json => {
 
 const renderBookItem = bookObj => `
     <li class="book-item">
-        <h4 class="book-title">Title: ${bookObj.volumeInfo.title}</h4>
-        <p class="book-authors">Authors: ${
-            bookObj.volumeInfo.authors ? 
-            bookObj.volumeInfo.authors.join(", ") :
-            "N/A"
-        }
-        </p>
-        <p class="publishing company">Publisher: ${bookObj.volumeInfo.publisher}</p>
-        ${
-            bookObj.volumeInfo.imageLinks ? 
-            `<img src="${bookObj.volumeInfo.imageLinks.smallThumbnail}" />`  :
-            ""
-        }
-        />
+        <div class="thumbnail-main">
+            <h4 class="book-title">Title: ${bookObj.volumeInfo.title}</h4>
+            ${
+                bookObj.volumeInfo.imageLinks ? 
+                `<img src="${bookObj.volumeInfo.imageLinks.smallThumbnail}" />`  :
+                ""
+            }    
+        </div>
+        <div class="details">
+            <p class="book-authors">Authors: ${
+                bookObj.volumeInfo.authors ? 
+                bookObj.volumeInfo.authors.join(", ") :
+                "N/A"
+            }
+            </p>
+            <p class="publishing company">Publisher: ${bookObj.volumeInfo.publisher}</p>
+            <a class="learn-more" href="${bookObj.volumeInfo.infoLink}" target="_blank">Learn more</a>
+        </div>
     </li>
 `
 
@@ -81,4 +108,5 @@ const renderNoResults = () => `
 
 // assign event listeners
 $(".search-form").addEventListener("submit", handleFormSubmit);
+$(".search-input").addEventListener("focus", clearErrorState);
 
