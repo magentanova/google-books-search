@@ -37,26 +37,32 @@ document.body.innerHTML = `
         <i>Shhh!</i>
     </div>
     <div class="page-body">
-        <form class="search-form">
-            <input 
-                class="search-input" 
-                id="searchInput" 
-                name="searchInput" 
-                placeholder="Enter a search term" />
-            <button type="submit"></button>
+        <div class="search-area">
+            <h3>Search our catalog</h3>
+            <form class="search-form">
+                <input 
+                    class="search-input" 
+                    id="searchInput" 
+                    name="searchInput" 
+                    placeholder="Enter a search term" />
+                <button type="submit">Go</button>
+            </form>
             <p class="error-message"></p>
-        </form>
-        <ul class="book-list"></ul>
+        </div>
+        <div class="results-area">
+            <p class="results-message"></p>
+            <ul class="book-list"></ul>
+        </div>
     </div>
 `;
 
 const clearErrorState = () => {
-    $(".search-form .error-message").innerHTML = ""
+    $(".error-message").innerHTML = ""
     $(".search-form .search-input").classList.remove("error");
 }
 
 const enterErrorState = () => {
-    $(".search-form .error-message").innerHTML  = "Please enter a search term."
+    $(".error-message").innerHTML  = "Please enter a search term."
     $(".search-form .search-input").classList.add("error");
 }
 
@@ -71,40 +77,41 @@ const handleFormSubmit = e => {
 }
 
 const renderBooksResponse = json => {
-    if (!json.totalItems) {
-        $(".book-list").innerHTML = renderNoResults();
-    }
-    else {
-        $(".book-list").innerHTML = json.items.map(renderBookItem).join("");    
-    }
+    $(".results-area .results-message").innerHTML = renderResultsMessage(json.totalItems);
+    $(".book-list").innerHTML = json.items.map(renderBookItem).join("");    
 }
 
 const renderBookItem = bookObj => `
     <li class="book-item">
-        <div class="thumbnail-main">
-            <h4 class="book-title">Title: ${bookObj.volumeInfo.title}</h4>
-            ${
-                bookObj.volumeInfo.imageLinks ? 
-                `<img src="${bookObj.volumeInfo.imageLinks.smallThumbnail}" />`  :
-                ""
-            }    
-        </div>
+        <h4 class="book-title">${bookObj.volumeInfo.title}</h4>
         <div class="details">
-            <p class="book-authors">Authors: ${
-                bookObj.volumeInfo.authors ? 
-                bookObj.volumeInfo.authors.join(", ") :
-                "N/A"
-            }
-            </p>
-            <p class="publishing company">Publisher: ${bookObj.volumeInfo.publisher}</p>
-            <a class="learn-more" href="${bookObj.volumeInfo.infoLink}" target="_blank">Learn more</a>
+            <div class="thumbnail">
+                <img src="
+                ${
+                    bookObj.volumeInfo.imageLinks ? 
+                    bookObj.volumeInfo.imageLinks.smallThumbnail :
+                    "https://via.placeholder.com/133x205.png?text=No%20Image"
+                }
+                " />
+            </div>
+            <div class="metadata">
+                <p class="book-authors">Authors: ${
+                    bookObj.volumeInfo.authors ? 
+                    bookObj.volumeInfo.authors.join(", ") :
+                    "N/A"
+                }
+                </p>
+                <p class="publishing company">Publisher: ${bookObj.volumeInfo.publisher || "Not listed"}</p>
+                <a class="learn-more" href="${bookObj.volumeInfo.infoLink}" target="_blank">Learn more</a>
+            </div>
         </div>
     </li>
-`
-
-const renderNoResults = () => `
-    <p class="no-results">No results found</p>
 `;
+
+const renderResultsMessage = itemCount => 
+    itemCount ? 
+        `Your search returned ${itemCount} results...` 
+        : "No results found.";
 
 // assign event listeners
 $(".search-form").addEventListener("submit", handleFormSubmit);
