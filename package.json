@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/magentanova/the-library/issues"
   },
-  "homepage": "https://github.com/magentanova/the-library#readme"
+  "homepage": "https://github.com/magentanova/the-library#readme",
+  "devDependencies": {
+    "jest": "^24.9.0",
+    "supertest": "^4.0.2"
+  }
 }

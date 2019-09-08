@@ -1,31 +1,46 @@
-// app settings
+// SETTINGS
 SEARCH_URL = "/book-search";
 
 
-// helper functions
-
-// test this equivalence
+// HELPERS / UTILS
 const $ = sel => document.querySelector(sel);
 const $$ = sel => document.querySelector(sel);
+const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 
-// test that this will either populate the right element 
-    //  or fail properly
 
-const testCallback = function(json) {
-    console.log('farts')
-    console.log(json)
-}
-
+// ACTIONS
 const fetchBooks = query => {
     fetch(formatQueryURL(SEARCH_URL, query))
         .catch( 
             err => console.error(err)
         )
         .then(resp => resp.json())
-        .then(json => console.log(json))
+        .then(json => console.log(json));
 }
 
-// test that this does what it's supposed to
-const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`
 
-fetchBooks("dinosaurs")
+// VIEW LOGIC
+
+// (writing the document body here instead of in the index file so that the 
+    // same html is created when requiring this module for testing)
+document.body.innerHTML = `
+    <h1>Welcome to The Library</h1>
+    <i>Shhh!</i>
+    <p>florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum florum clorum borum decorum </p>
+    <form class="search-form">
+        <input class="search-input" id="searchInput" />
+        <button type="submit" />
+    </form>
+    <ul class="book-list">
+    </ul>
+`;
+
+const handleFormSubmit = e => {
+    e.preventDefault();
+    window.trgt = e.target;
+    $(".book-list").innerHTML = "poo";
+}
+
+$(".search-form").addEventListener("submit", handleFormSubmit);
+
+fetchBooks("dinosaurs");
