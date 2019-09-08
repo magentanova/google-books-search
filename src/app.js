@@ -17,6 +17,8 @@ const formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;
 
 // ACTIONS
 const fetchBooks = query => {
+    $(".results-area .results-message").innerHTML = "Loading...";
+    $("book-list").innerHTML = `<img src="/static/loader.gif" />`
     fetch(formatQueryURL(SEARCH_URL, query))
         .then(
             resp => resp.json(),
