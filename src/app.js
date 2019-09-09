@@ -34,6 +34,7 @@ const fetchBooks = query => {
 }
 
 // VIEW LOGIC
+
 // (writing the document body here instead of in the index file so that the 
     // same html is created when requiring this module for testing)
 document.body.innerHTML = `
