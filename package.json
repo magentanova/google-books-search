@@ -4,8 +4,9 @@
   "description": "A tool for searching the Google Books API",
   "main": "server.js",
   "scripts": {
+    "dev": "webpack -w --mode development",
     "test": "NODE_ENV=test jest",
-    "start": "node server.js"
+    "start": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -18,8 +19,16 @@
   },
   "homepage": "https://github.com/magentanova/the-library#readme",
   "devDependencies": {
+    "eslint": "^6.3.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
     "jest": "^24.9.0",
     "supertest": "^4.0.2",
-    "supertest-fetch": "^1.4.1"
+    "supertest-fetch": "^1.4.1",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.8"
   }
 }

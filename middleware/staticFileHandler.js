@@ -8,7 +8,7 @@ module.exports = (request, response) => {
 
     const parsedUrl = url.parse(request.url);
     // extract URL path
-    let pathname = `.${parsedUrl.pathname}`;
+    let pathname = `dist${parsedUrl.pathname}`;
     // based on the URL path, extract the file extention. e.g. .js, .doc, ...
     let ext = path.parse(pathname).ext;
     // maps file extention to MIME typere
@@ -38,7 +38,7 @@ module.exports = (request, response) => {
         // if is a directory search for index file matching the extention
         if (fs.statSync(pathname).isDirectory()) {
             ext = '.html';
-            pathname += `index${ext}`;
+            pathname += `/index${ext}`;
         }
     
         // read file from file system
@@ -54,5 +54,4 @@ module.exports = (request, response) => {
             }
         });
     });
-      
 }
