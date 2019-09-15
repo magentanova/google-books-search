@@ -6,17 +6,23 @@
 
 `npm install`
 
+
 ### Start webpack 
 
 `npm run dev` 
 
-### Run the server
+
+### Run the server (proxy API & static file server)
 
 `npm run serve`
+
+(Note that to develop locally, both webpack and the server should be running at the same time.)
+
 
 ### Run the Tests
 
 `npm run test`
+
 
 ## Notes to Reviewer
 
@@ -32,6 +38,6 @@ Things I would add in a future implementation:
 
   - Unit tests for the `Component` module. In the interest of time, I omitted tests for this, treating it more as an external library.
 
-  - Integration tests to make sure that cross-component interactions involving app state had the desired effects. 
+  - Integration tests to make sure that cross-component interactions involving app state have the desired effects. 
 
 Overall I had a great time doing this project. It's been a while since I wrote a non-trivial JS app without using any frameworks, so it was a great exercise. 
