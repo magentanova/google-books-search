@@ -10,7 +10,8 @@ describe('the SearchForm component', () => {
             .toEqual('Please enter a search term.');
         expect(tree.querySelector('.search-form .search-input').classList)
             .toContain('error');
-    })
+    });
+
     it('should not enter an error state if `error` is not received as a prop', () => {
         // arrange 
         const tree = new SearchForm({error: false}).render()
@@ -20,20 +21,22 @@ describe('the SearchForm component', () => {
             .toEqual('');
         expect(tree.querySelector('.search-form .search-input').classList)
             .not.toContain('error');
-    })
+    });
+
     it('should call onInvalidSubmission if the submission is invalid', () => {
         // arrange 
         const props = {
             onInvalidSubmission: jest.fn()
         }
-        const tree = new SearchForm(props).render()
+        const tree = new SearchForm(props).render();
 
         // act
         tree.$('button[type="submit"]').click();
 
         // assert
         expect(props.onInvalidSubmission).toHaveBeenCalled();
-    })
+    });
+    
     it('should call onSubmit, and not onInvalidSubmission, \
 if the submission is valid', () => {
         // arrange 

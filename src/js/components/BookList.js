@@ -1,6 +1,6 @@
 import Component from '../lib/createComponent';
 
-import BookItem from './BookItem';
+import BookItem from './BookItem/BookItem';
 import store from '../store';
 
 export default Component({
