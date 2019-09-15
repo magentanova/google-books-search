@@ -3,6 +3,12 @@ import Component from '../../lib/createComponent';
 import BookItem from '../BookItem/BookItem';
 
 export default Component({
+    propTypes: {
+        books: 'object',
+        booksLoaded: 'boolean',
+        booksLoading: 'boolean'
+    },
+
     template () {
         let resultsMessage = '';
         if (this.props.booksLoaded) {

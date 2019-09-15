@@ -28,20 +28,20 @@ export default createComponent({
                     updateStore({
                         formInvalid: false,
                         searchFocus: true
-                    })    
+                    }); 
                 }
             },
             onInvalidSubmission: () => {
                 updateStore({
                     formInvalid: true,
                     searchFocus: false
-                })
+                });
             },
             onSubmit: (query) => {
                 updateStore({
                     booksLoading: true,
                     booksLoaded: false
-                })
+                });
                 fetchBooks(query)
                     .then(
                         response => {
@@ -50,18 +50,18 @@ export default createComponent({
                                 booksLoaded: true,
                                 booksLoading: false,
                                 totalBooks: response.totalItems
-                            })
+                            });
                         }
-                    )
+                    );
             }
-        }
+        };
 
         const bookListProps = {
             books: this.props.books,
             totalBooks: this.props.totalBooks,
             booksLoaded: this.props.booksLoaded,
             booksLoading: this.props.booksLoading
-        }
+        };
 
         this.tree.querySelector('.page-body')
             .appendChild(

@@ -1,11 +1,18 @@
 import createComponent from '../../lib/createComponent';
 
 export default createComponent({
+    propTypes: {
+        focus: 'boolean',
+        error: 'boolean',
+        onSubmit: 'function',
+        onInvalidSubmission: 'function'
+    },
+
     template () {
-        const errorMessage = this.props.error 
+        const errorMessage = this.props.error
             ? 'Please enter a search term.'
             : '';
-            
+
         const errorClass = this.props.error ? 'error' : '';
 
         return (
@@ -26,13 +33,13 @@ export default createComponent({
     },
 
     events: {
-        '.search-input focus': function(e) {
+        '.search-input focus': function (e) {
             this.props.onFocus();
         },
 
-        '.search-form submit': function(e){
+        '.search-form submit': function (e) {
             e.preventDefault();
-            const searchTerm = this.tree.$('.search-input').value
+            const searchTerm = this.tree.$('.search-input').value;
             if (!searchTerm) {
                 this.props.onInvalidSubmission();
             }
@@ -42,14 +49,14 @@ export default createComponent({
         }
     },
 
-    postRender: function() {
+    postRender: function () {
         if (this.props.focus) {
             const self = this;
             // this is ...unfortunate. with time i would come up with something better,
                 // but unfortunately focus is not preserved when an unattached node
-                // is attached to the dom. 
+                // is attached to the dom.
             setTimeout(() => {
-                self.tree.$('.search-input').focus()
+                self.tree.$('.search-input').focus();
             }, 50);
         };
     }

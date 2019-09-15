@@ -8,15 +8,26 @@ function that returns an html string`);
     const Component = function (props) {
         // defaults/stubs
         this.events = {};
-        this.postRender = () => {};
         this.init = () => {};
+        this.postRender = () => {};
+        this.propTypes = {};
+        this.checkPropTypes = false;
 
         Object.assign(this, initObj);
+
+        if (this.checkPropTypes) {
+            for (const key in this.propTypes) {
+                if (typeof props[key] !== this.propTypes[key]) {
+                    throw new Error(`The required type for the prop ${key} is \
+    ${this.propTypes[key]}. Received ${props[key]}`);
+                }
+            }
+        }
         this.props = props || {};
         this.init();
     };
     Component.prototype = {
-        assignEventHandlers() {
+        assignEventHandlers () {
             Object.keys(this.events).map(selectorAndTrigger => {
                 const [selector, trigger] = selectorAndTrigger.split(' ');
                 const handler = this.events[selectorAndTrigger];

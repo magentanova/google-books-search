@@ -50,7 +50,7 @@ describe('The SearchForm component', () => {
         tree.$('.search-input').focus();
 
         // assert
-        // focus events don't seem to play nice with jsdom. 
+        // focus events don't seem to play nice with jsdom.
         // tabling this for now.
         // expect(props.onFocus).toHaveBeenCalled();
     });

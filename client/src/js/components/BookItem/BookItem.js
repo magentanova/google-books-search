@@ -1,6 +1,10 @@
 import createComponent from '../../lib/createComponent';
 
 export default createComponent({
+    propTypes: {
+        book: 'object'
+    },
+
     template () {
         return (
             `<li class="book-item">
@@ -22,7 +26,7 @@ export default createComponent({
                             : 'N/A'
                         }</p>
                         <p class="publishing-company">Publisher: ${this.props.book.publisher || 'Not listed'}</p>
-                        ${this.props.book.infoLink 
+                        ${this.props.book.infoLink
                             ? `<a class="learn-more" href="${this.props.book.infoLink}" target="_blank">Learn more</a>`
                             : ''
                         }
