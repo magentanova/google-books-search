@@ -2,9 +2,8 @@ const parser = new DOMParser();
 
 const createComponent = (initObj) => {
     if (typeof initObj.template !== 'function') {
-        throw new Error(
-            `a component must be initialized with a template function that
-returns an html string`);
+        throw new Error(`a component must be initialized with a template 
+function that returns an html string`);
     }
     const Component = function (props) {
         this.props = props;
@@ -27,8 +26,7 @@ returns an html string`);
             return this.tree;
         },
         mount (el) {
-            el.innerHTML = this.render().innerHTML;
-            this.postRender();
+            el.appendChild(this.render());
         }
     };
     return Component;

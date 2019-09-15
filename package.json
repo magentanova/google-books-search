@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack -w --mode development",
     "test": "NODE_ENV=test jest",
-    "start": "nodemon server.js"
+    "serve": "nodemon server.js"
   },
   "repository": {
     "type": "git",
