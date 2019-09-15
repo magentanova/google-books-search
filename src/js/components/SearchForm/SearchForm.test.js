@@ -38,6 +38,21 @@ describe('The SearchForm component', () => {
         expect(props.onInvalidSubmission).toHaveBeenCalled();
     });
 
+    it('should call its `onFocus` prop when its input receives focus', 
+    () => {
+        // arrange 
+        const props = {
+            onFocus: jest.fn()
+        }
+        const tree = new SearchForm(props).render();
+
+        // act
+        tree.$('.search-input').focus();
+
+        // assert
+        expect(props.onFocus).toHaveBeenCalled();
+    });
+
     it('should call its `onSubmit` prop, and not onInvalidSubmission, \
 if the submission is valid. it should pass the query entered into the form \
 as an input to onSubmit.', () => {

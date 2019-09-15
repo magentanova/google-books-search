@@ -18,12 +18,23 @@ export default createComponent({
             </div>`
         );
     },
+
     postRender () {
-        const searchProps = {
-            formInvalid: this.props.formInvalid,
+        const searchFormProps = {
+            error: this.props.formInvalid,
+            focus: this.props.searchFocus,
+            onFocus: () => {
+                if (this.props.formInvalid) {
+                    updateStore({
+                        formInvalid: false,
+                        searchFocus: true
+                    })    
+                }
+            },
             onInvalidSubmission: () => {
                 updateStore({
-                    formInvalid: true
+                    formInvalid: true,
+                    searchFocus: false
                 })
             },
             onSubmit: (query) => {
@@ -35,7 +46,7 @@ export default createComponent({
                     .then(
                         response => {
                             updateStore({
-                                books: response.items,
+                                books: response.items || [],
                                 booksLoaded: true,
                                 booksLoading: false,
                                 totalBooks: response.totalItems
@@ -54,7 +65,7 @@ export default createComponent({
 
         this.tree.querySelector('.page-body')
             .appendChild(
-                new SearchForm(searchProps).render()
+                new SearchForm(searchFormProps).render()
             ).parentNode
             .appendChild(
                 new BookList(bookListProps).render()

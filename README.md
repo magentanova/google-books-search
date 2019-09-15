@@ -1,21 +1,22 @@
 # The Library — An Eighth Light Challenge
 
-## Running the App
+## Running locally
 
-The app has no dependencies, so startup is pretty simple.
+### Install dependencies
 
-  - Clone the repo and `cd` in 
-  - `npm run start` 
-  - Open `localhost:3000` in the browser and see how things look
+`npm install`
 
+### Start webpack 
 
-## Running the Tests
+`npm run dev` 
 
-The tests, on the other hand, do have some dependencies. So...
+### Run the server
 
-  - Clone the repo and `cd` in.
-  - `npm install`
-  - `npm run test`
+`npm run serve`
+
+### Run the Tests
+
+`npm run test`
 
 
 ## Notes to reviewer

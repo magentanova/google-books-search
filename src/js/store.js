@@ -3,7 +3,8 @@ const initalState = {
     booksLoaded: false,
     booksLoading: false,
     formInvalid: false,
-    searchError: false
+    searchError: false,
+    searchFocus: false
 };
 
 const store = {
