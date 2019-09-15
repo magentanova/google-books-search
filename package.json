@@ -18,6 +18,7 @@
     ]
   },
   "scripts": {
+    "build": "webpack -p --config client/webpack.config.js",
     "dev": "webpack -w --mode development --config client/webpack.config.js",
     "test": "NODE_ENV=test jest",
     "serve": "nodemon server/server.js"

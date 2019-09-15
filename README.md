@@ -19,16 +19,21 @@
 (Note that to develop locally, both webpack and the server should be running at the same time.)
 
 
-### Run the Tests
+### Run the tests
 
 `npm run test`
+
+
+### Make a production build
+
+`npm run build`
 
 
 ## Notes to Reviewer
 
 After a helpful review from 8th Light, I got a better understanding of what the team was looking for and significantly refactored the front-end code. The reviewer pointed out to me that there is browser support for ES6-style modules added via script tags. Given the complexity of the refactor, I thought webpack (also stated as an allowed option) made sense. 
 
-Things I like about the current setup are that it allows components to be pretty well decoupled from the app logic, with a clear public contract expressed through React-style props. It's definitely not a full-fledged view framework -- its many shortcomings include no local component "state", an awkward interface for rendering children of a container component, no VDOM-style render optimization, and a very limited "propTypes" implementation -- but it gets the job done for this project. 
+Things I like about the current setup are that it allows components to be pretty well decoupled from the app logic, with a clear public contract expressed through React-style props, and that it implements a simple unidirectional data-flow pattern with a single source of app state. It's definitely not a full-fledged view framework -- its many shortcomings include no local component state, an awkward interface for rendering children of a container component, no VDOM-style render optimization, and a very limited "propTypes" implementation -- but it gets the job done for this project. 
 
 Things I would add in a future implementation:
 
