@@ -7,8 +7,9 @@ export default Component({
         let resultsMessage = '';
         if (this.props.booksLoaded) {
             if (this.props.totalBooks) {
-                resultsMessage = `There are ${this.props.totalBooks} \
-books that match your search query. Displaying results 1 - 10.`;
+                const numBooks = parseInt(this.props.totalBooks).toLocaleString();
+                resultsMessage = `There are ${numBooks} books that match \
+your search query. Displaying results 1 - 10.`;
             }
             else {
                 resultsMessage = 'No books match your search query.';
@@ -37,7 +38,7 @@ books that match your search query. Displaying results 1 - 10.`;
         if (this.props.booksLoaded) {
             this.props.books.forEach(bookObj => {
                 this.tree.$('.book-list').appendChild(
-                    new BookItem({book: bookObj}).render()
+                    new BookItem({book: bookObj.volumeInfo}).render()
                 );
             });    
         };

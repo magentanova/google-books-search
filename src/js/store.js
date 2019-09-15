@@ -2,7 +2,8 @@ const initalState = {
     books: [],
     booksLoaded: false,
     booksLoading: false,
-    formInvalid: false
+    formInvalid: false,
+    searchError: false
 };
 
 const store = {

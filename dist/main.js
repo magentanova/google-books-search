@@ -86,6 +86,18 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./src/js/actions/fetchBooks.js":
+/*!**************************************!*\
+  !*** ./src/js/actions/fetchBooks.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../utils */ \"./src/js/utils.js\");\n/* harmony import */ var _settings__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../settings */ \"./src/js/settings.js\");\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (query => {\n    if (query === undefined) {\n        throw new Error('fetchBooks() must be invoked with a search term.');\n    };\n    const searchEndpoint = Object(_utils__WEBPACK_IMPORTED_MODULE_0__[\"formatQueryURL\"])(_settings__WEBPACK_IMPORTED_MODULE_1__[\"SEARCH_URL\"], query);\n    return fetch(searchEndpoint)\n        .then(\n            resp => resp.json()\n        )\n        .then(\n            json => ({...json, searchEndpoint})\n        )\n        .catch(\n            err => {\n                throw new Error(err);\n            }\n        );\n});\n\n\n//# sourceURL=webpack:///./src/js/actions/fetchBooks.js?");
+
+/***/ }),
+
 /***/ "./src/js/app.js":
 /*!***********************!*\
   !*** ./src/js/app.js ***!
@@ -118,7 +130,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/createComponent */ \"./src/js/lib/createComponent.js\");\n/* harmony import */ var _BookItem_BookItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BookItem/BookItem */ \"./src/js/components/BookItem/BookItem.js\");\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_lib_createComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    template () {\n        let resultsMessage = '';\n        if (this.props.booksLoaded) {\n            if (this.props.totalBooks) {\n                resultsMessage = `There are ${this.props.totalBooks} \\\nbooks that match your search query. Displaying results 1 - 10.`;\n            }\n            else {\n                resultsMessage = 'No books match your search query.';\n            }\n        }\n\n        let loadingGif = '';\n        let loadingMessage = '';\n        if (this.props.booksLoading) {\n            loadingGif = '<img alt=\"loading-gif\" src=\"/static/loader.gif\"/>'\n            loadingMessage = 'Loading...'\n        }\n        \n        return (\n            `<div class=\"results-area\">\n                <p class=\"results-message\">${resultsMessage}</p>\n                <div class=\"loading-area\" >\n                    <p class=\"loading-message\">${loadingMessage}</p>\n                    <div class=\"loading-gif\">${loadingGif}</div>\n                </div>\n                <ul class=\"book-list\"></ul>\n            </div>`\n        );\n    },\n    postRender () {\n        if (this.props.booksLoaded) {\n            this.props.books.forEach(bookObj => {\n                this.tree.$('.book-list').appendChild(\n                    new _BookItem_BookItem__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({book: bookObj}).render()\n                );\n            });    \n        };\n    }\n}));\n\n\n//# sourceURL=webpack:///./src/js/components/BookList/BookList.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/createComponent */ \"./src/js/lib/createComponent.js\");\n/* harmony import */ var _BookItem_BookItem__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BookItem/BookItem */ \"./src/js/components/BookItem/BookItem.js\");\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_lib_createComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    template () {\n        let resultsMessage = '';\n        if (this.props.booksLoaded) {\n            if (this.props.totalBooks) {\n                const numBooks = parseInt(this.props.totalBooks).toLocaleString();\n                resultsMessage = `There are ${numBooks} books that match \\\nyour search query. Displaying results 1 - 10.`;\n            }\n            else {\n                resultsMessage = 'No books match your search query.';\n            }\n        }\n\n        let loadingGif = '';\n        let loadingMessage = '';\n        if (this.props.booksLoading) {\n            loadingGif = '<img alt=\"loading-gif\" src=\"/static/loader.gif\"/>'\n            loadingMessage = 'Loading...'\n        }\n        \n        return (\n            `<div class=\"results-area\">\n                <p class=\"results-message\">${resultsMessage}</p>\n                <div class=\"loading-area\" >\n                    <p class=\"loading-message\">${loadingMessage}</p>\n                    <div class=\"loading-gif\">${loadingGif}</div>\n                </div>\n                <ul class=\"book-list\"></ul>\n            </div>`\n        );\n    },\n    postRender () {\n        if (this.props.booksLoaded) {\n            this.props.books.forEach(bookObj => {\n                this.tree.$('.book-list').appendChild(\n                    new _BookItem_BookItem__WEBPACK_IMPORTED_MODULE_1__[\"default\"]({book: bookObj.volumeInfo}).render()\n                );\n            });    \n        };\n    }\n}));\n\n\n//# sourceURL=webpack:///./src/js/components/BookList/BookList.js?");
 
 /***/ }),
 
@@ -130,7 +142,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/createComponent */ \"./src/js/lib/createComponent.js\");\n/* harmony import */ var _BookList_BookList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BookList/BookList */ \"./src/js/components/BookList/BookList.js\");\n/* harmony import */ var _SearchForm_SearchForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SearchForm/SearchForm */ \"./src/js/components/SearchForm/SearchForm.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../store */ \"./src/js/store.js\");\n\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_lib_createComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    template () {\n        return (\n            `<div class=\"home-page\">\n                <div class=\"header\">\n                    <h1>Welcome to The Library</h1>\n                    <i>Shhh!</i>\n                </div>\n                <div class=\"page-body\">\n                </div>\n            </div>`\n        );\n    },\n    postRender () {\n        const appState = _store__WEBPACK_IMPORTED_MODULE_3__[\"default\"].getState();\n\n        this.tree.querySelector('.page-body')\n            .appendChild(\n                new _SearchForm_SearchForm__WEBPACK_IMPORTED_MODULE_2__[\"default\"]().render()\n            ).parentNode\n            .appendChild(\n                new _BookList_BookList__WEBPACK_IMPORTED_MODULE_1__[\"default\"]().render()\n            );\n    }\n}));\n\n\n//# sourceURL=webpack:///./src/js/components/HomePage/HomePage.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _lib_createComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../lib/createComponent */ \"./src/js/lib/createComponent.js\");\n/* harmony import */ var _BookList_BookList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../BookList/BookList */ \"./src/js/components/BookList/BookList.js\");\n/* harmony import */ var _SearchForm_SearchForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../SearchForm/SearchForm */ \"./src/js/components/SearchForm/SearchForm.js\");\n/* harmony import */ var _actions_fetchBooks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../actions/fetchBooks */ \"./src/js/actions/fetchBooks.js\");\n/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../store */ \"./src/js/store.js\");\n\n\n\n\n\n\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (Object(_lib_createComponent__WEBPACK_IMPORTED_MODULE_0__[\"default\"])({\n    template () {\n        return (\n            `<div class=\"home-page\">\n                <div class=\"header\">\n                    <h1>Welcome to The Library</h1>\n                    <i>Shhh!</i>\n                </div>\n                <div class=\"page-body\">\n                </div>\n            </div>`\n        );\n    },\n    postRender () {\n        const searchProps = {\n            formInvalid: this.props.formInvalid,\n            onInvalidSubmission: () => {\n                Object(_store__WEBPACK_IMPORTED_MODULE_4__[\"updateStore\"])({\n                    formInvalid: true\n                })\n            },\n            onSubmit: (query) => {\n                Object(_store__WEBPACK_IMPORTED_MODULE_4__[\"updateStore\"])({\n                    booksLoading: true,\n                    booksLoaded: false\n                })\n                Object(_actions_fetchBooks__WEBPACK_IMPORTED_MODULE_3__[\"default\"])(query)\n                    .then(\n                        response => {\n                            Object(_store__WEBPACK_IMPORTED_MODULE_4__[\"updateStore\"])({\n                                books: response.items,\n                                booksLoaded: true,\n                                booksLoading: false,\n                                totalBooks: response.totalItems\n                            })\n                        }\n                    )\n            }\n        }\n\n        const bookListProps = {\n            books: this.props.books,\n            totalBooks: this.props.totalBooks,\n            booksLoaded: this.props.booksLoaded,\n            booksLoading: this.props.booksLoading\n        }\n\n        this.tree.querySelector('.page-body')\n            .appendChild(\n                new _SearchForm_SearchForm__WEBPACK_IMPORTED_MODULE_2__[\"default\"](searchProps).render()\n            ).parentNode\n            .appendChild(\n                new _BookList_BookList__WEBPACK_IMPORTED_MODULE_1__[\"default\"](bookListProps).render()\n            );\n    }\n}));\n\n\n//# sourceURL=webpack:///./src/js/components/HomePage/HomePage.js?");
 
 /***/ }),
 
@@ -158,6 +170,18 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst parser = new DOMParser(
 
 /***/ }),
 
+/***/ "./src/js/settings.js":
+/*!****************************!*\
+  !*** ./src/js/settings.js ***!
+  \****************************/
+/*! exports provided: SEARCH_URL */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"SEARCH_URL\", function() { return SEARCH_URL; });\nconst SEARCH_URL = '/book-search';\n\n//# sourceURL=webpack:///./src/js/settings.js?");
+
+/***/ }),
+
 /***/ "./src/js/store.js":
 /*!*************************!*\
   !*** ./src/js/store.js ***!
@@ -166,7 +190,19 @@ eval("__webpack_require__.r(__webpack_exports__);\nconst parser = new DOMParser(
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"updateStore\", function() { return updateStore; });\nconst initalState = {\n    books: [],\n    booksLoaded: false,\n    booksLoading: false,\n    formInvalid: false\n};\n\nconst store = {\n    events: {},\n    data: initalState\n};\n\nstore.get = attr => store.data[attr];\n\nstore.getState = () => store.data;\n\nstore.set = obj => {\n    store.data = Object.assign(store.data, obj);\n    store.trigger('update');\n};\n\nstore.on = (event, callback) => {\n    const callbacks = store.events[event];\n    store.events[event] = callbacks ? [...callbacks, callback] : [callback];\n};\n\nstore.trigger = (event, ...args) => {\n    store.events[event].forEach(handler => handler(...args));\n};\n\nconst updateStore = store.set.bind(store);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (store);\n\n\n//# sourceURL=webpack:///./src/js/store.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"updateStore\", function() { return updateStore; });\nconst initalState = {\n    books: [],\n    booksLoaded: false,\n    booksLoading: false,\n    formInvalid: false,\n    searchError: false\n};\n\nconst store = {\n    events: {},\n    data: initalState\n};\n\nstore.get = attr => store.data[attr];\n\nstore.getState = () => store.data;\n\nstore.set = obj => {\n    store.data = Object.assign(store.data, obj);\n    store.trigger('update');\n};\n\nstore.on = (event, callback) => {\n    const callbacks = store.events[event];\n    store.events[event] = callbacks ? [...callbacks, callback] : [callback];\n};\n\nstore.trigger = (event, ...args) => {\n    store.events[event].forEach(handler => handler(...args));\n};\n\nconst updateStore = store.set.bind(store);\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (store);\n\n\n//# sourceURL=webpack:///./src/js/store.js?");
+
+/***/ }),
+
+/***/ "./src/js/utils.js":
+/*!*************************!*\
+  !*** ./src/js/utils.js ***!
+  \*************************/
+/*! exports provided: $, formatQueryURL */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"$\", function() { return $; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"formatQueryURL\", function() { return formatQueryURL; });\nconst $ = sel => document.querySelector(sel);\n\nconst formatQueryURL = (baseURL, query) => `${baseURL}?q=${query}`;\n\n\n//# sourceURL=webpack:///./src/js/utils.js?");
 
 /***/ })
 
