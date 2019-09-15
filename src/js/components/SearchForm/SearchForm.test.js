@@ -39,7 +39,8 @@ describe('The SearchForm component', () => {
     });
 
     it('should call its `onSubmit` prop, and not onInvalidSubmission, \
-if the submission is valid.', () => {
+if the submission is valid. it should pass the query entered into the form \
+as an input to onSubmit.', () => {
         // arrange 
         const props = {
             onInvalidSubmission: jest.fn(),
@@ -48,11 +49,13 @@ if the submission is valid.', () => {
         const tree = new SearchForm(props).render();
 
         // act
-        tree.$('input').value = 'query';
+        const testQuery = 'query';
+        tree.$('input').value = testQuery;
         tree.$('button[type="submit"]').click();
 
         // assert
         expect(props.onInvalidSubmission).not.toHaveBeenCalled();
         expect(props.onSubmit).toHaveBeenCalled();
+        expect(props.onSubmit.mock.calls[0][0]).toEqual(testQuery);
     })
 })

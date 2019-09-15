@@ -2,6 +2,7 @@ import createComponent from '../../lib/createComponent';
 
 import BookList from '../BookList/BookList';
 import SearchForm from '../SearchForm/SearchForm';
+import store from '../../store';
 
 export default createComponent({
     template () {
@@ -17,9 +18,9 @@ export default createComponent({
         );
     },
     postRender () {
+        const appState = store.getState();
 
-        const pageBody = this.tree.querySelector('.page-body');
-        pageBody
+        this.tree.querySelector('.page-body')
             .appendChild(
                 new SearchForm().render()
             ).parentNode

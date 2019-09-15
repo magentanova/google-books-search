@@ -1,8 +1,8 @@
 const initalState = {
     books: [],
-    resultsMessage: '',
-    errorMessage: '',
-    loading: false
+    booksLoaded: false,
+    booksLoading: false,
+    formInvalid: false
 };
 
 const store = {
@@ -11,6 +11,8 @@ const store = {
 };
 
 store.get = attr => store.data[attr];
+
+store.getState = () => store.data;
 
 store.set = obj => {
     store.data = Object.assign(store.data, obj);
@@ -25,5 +27,7 @@ store.on = (event, callback) => {
 store.trigger = (event, ...args) => {
     store.events[event].forEach(handler => handler(...args));
 };
+
+export const updateStore = store.set.bind(store);
 
 export default store;

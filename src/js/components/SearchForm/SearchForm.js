@@ -27,11 +27,12 @@ export default createComponent({
     events: {
         '.search-form submit': function(e){
             e.preventDefault();
-            if (!this.tree.$('#searchInput').value) {
+            const searchTerm = this.tree.$('#searchInput').value
+            if (!searchTerm) {
                 this.props.onInvalidSubmission();
             }
             else {
-                this.props.onSubmit();
+                this.props.onSubmit(searchTerm);
             }
         }
     },

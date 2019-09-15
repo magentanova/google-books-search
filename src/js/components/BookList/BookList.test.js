@@ -36,6 +36,7 @@ Displaying results 1 - 10.`);
 
     it(', given a booksLoaded prop of `false`, should render neither books nor \
 a results message.', () => {
+        // arrange
         const props = {
             booksLoaded: false,
             books: []

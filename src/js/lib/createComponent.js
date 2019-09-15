@@ -33,6 +33,7 @@ function that returns an html string`);
             return this.tree;
         },
         mount (el) {
+            el.innerHTML = '';
             el.appendChild(this.render());
         }
     };
