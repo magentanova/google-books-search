@@ -10,7 +10,7 @@ export default createComponent({
 
         return (
             `<div class="search-area">
-                <h3>Search our catalog</h3>
+                <h3>Swearch our catalog</h3>
                 <form class="search-form">
                     <input 
                         class="search-input ${errorClass}" 

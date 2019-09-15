@@ -8,7 +8,7 @@ module.exports = (request, response) => {
 
     const parsedUrl = url.parse(request.url);
     // extract URL path
-    let pathname = `dist${parsedUrl.pathname}`;
+    let pathname = `client/dist${parsedUrl.pathname}`;
     // based on the URL path, extract the file extention. e.g. .js, .doc, ...
     let ext = path.parse(pathname).ext;
     // maps file extention to MIME typere

@@ -2,7 +2,7 @@
   "name": "the-library",
   "version": "1.0.0",
   "description": "A tool for searching the Google Books API",
-  "main": "server.js",
+  "main": "server/server.js",
   "jest": {
     "setupFiles": [
       "<rootDir>/testUtils/mock.js"
@@ -18,9 +18,9 @@
     ]
   },
   "scripts": {
-    "dev": "webpack -w --mode development",
+    "dev": "webpack -w --mode development --config client/webpack.config.js",
     "test": "NODE_ENV=test jest",
-    "serve": "nodemon server.js"
+    "serve": "nodemon server/server.js"
   },
   "repository": {
     "type": "git",
