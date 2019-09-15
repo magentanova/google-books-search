@@ -1,7 +1,7 @@
 import createComponent from '../lib/createComponent';
 
 import BookList from './BookList';
-import SearchForm from './SearchForm';
+import SearchForm from './SearchForm/SearchForm';
 
 export default createComponent({
     template () {
@@ -17,6 +17,7 @@ export default createComponent({
         );
     },
     postRender () {
+
         const pageBody = this.tree.querySelector('.page-body');
         pageBody
             .appendChild(

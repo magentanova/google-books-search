@@ -6,22 +6,28 @@ const createComponent = (initObj) => {
 function that returns an html string`);
     }
     const Component = function (props) {
-        this.props = props;
+        // defaults/stubs
         this.events = {};
         this.postRender = () => {};
+        this.init = () => {};
+
         Object.assign(this, initObj);
+        this.props = props || {};
+        this.init();
     };
     Component.prototype = {
-        $ (sel) {
-            return document.querySelector(sel);
-        },
-        render () {
-            this.tree = parser.parseFromString(this.template(), 'text/html').body.children[0];
+        assignEventHandlers() {
             Object.keys(this.events).map(selectorAndTrigger => {
                 const [selector, trigger] = selectorAndTrigger.split(' ');
                 const handler = this.events[selectorAndTrigger];
-                this.tree.querySelector(selector).addEventListener(trigger, handler);
+                this.tree.querySelector(selector).addEventListener(trigger, handler.bind(this));
             });
+        },
+        render () {
+            this.tree = parser.parseFromString(this.template(), 'text/html').body.children[0];
+            this.tree.$ = ((sel) => this.tree.querySelector(sel)).bind(this);
+
+            this.assignEventHandlers();
             this.postRender();
             return this.tree;
         },
