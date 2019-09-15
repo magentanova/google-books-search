@@ -1,5 +1,5 @@
 import HomePage from './components/HomePage/HomePage';
-import store from './store';
+import store from './state/store';
 
 const renderApp = () => {
     new HomePage(store.getState()).mount(document.body);

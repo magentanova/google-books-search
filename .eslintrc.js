@@ -17,6 +17,6 @@ module.exports = {
   rules: {
     indent: 0,
     semi: ["error", "always"],
-    "brace-style": ["error", "Stroustrup"]
+    "brace-style": ["error", "stroustrup"]
   }
 }

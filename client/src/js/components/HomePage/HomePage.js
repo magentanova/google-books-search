@@ -3,7 +3,7 @@ import createComponent from '../../lib/createComponent';
 import BookList from '../BookList/BookList';
 import SearchForm from '../SearchForm/SearchForm';
 import fetchBooks from '../../actions/fetchBooks';
-import { updateStore } from '../../store';
+import { updateStore } from '../../state/store';
 
 export default createComponent({
     template () {
