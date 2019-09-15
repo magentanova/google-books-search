@@ -3,7 +3,7 @@ import SearchForm from './SearchForm';
 describe('The SearchForm component', () => {
     it('should enter an error state if `error` is received as a prop.', () => {
         // arrange 
-        const tree = new SearchForm({error: true}).render()
+        const tree = new SearchForm({error: true}).render();
 
         // assert
         expect(tree.querySelector('.error-message').innerHTML)
@@ -23,7 +23,7 @@ describe('The SearchForm component', () => {
             .not.toContain('error');
     });
 
-    it('should call its `onInvalidSubmission` prop if the submission is invalid', 
+    it('should call its `onInvalidSubmission` prop if the submission is invalid',
       () => {
         // arrange 
         const props = {
@@ -43,7 +43,7 @@ describe('The SearchForm component', () => {
         // arrange
         const props = {
             onFocus: jest.fn()
-        }
+        };
         const tree = new SearchForm(props).render();
 
         // act

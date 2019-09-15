@@ -25,10 +25,10 @@ your search query. Displaying results 1 - 10.`;
         let loadingGif = '';
         let loadingMessage = '';
         if (this.props.booksLoading) {
-            loadingGif = '<img alt="loading-gif" src="/static/loader.gif"/>'
-            loadingMessage = 'Loading...'
+            loadingGif = '<img alt="loading-gif" src="/static/loader.gif"/>';
+            loadingMessage = 'Loading...';
         }
-        
+
         return (
             `<div class="results-area">
                 <p class="results-message">${resultsMessage}</p>
@@ -44,9 +44,9 @@ your search query. Displaying results 1 - 10.`;
         if (this.props.booksLoaded) {
             this.props.books.forEach(bookObj => {
                 this.tree.$('.book-list').appendChild(
-                    new BookItem({book: bookObj.volumeInfo}).render()
+                    new BookItem({ book: bookObj.volumeInfo }).render()
                 );
-            });    
+            });
         };
     }
 });

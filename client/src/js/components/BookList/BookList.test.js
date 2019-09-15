@@ -46,7 +46,7 @@ a results message.', () => {
         const props = {
             booksLoaded: false,
             books: []
-        }
+        };
         const tree = new BookList(props).render();
 
         // assert
@@ -60,7 +60,7 @@ a results message.', () => {
         const props = {
             booksLoaded: true,
             books: []
-        }
+        };
         const tree = new BookList(props).render();
 
         // assert
@@ -70,13 +70,13 @@ a results message.', () => {
         );
     });
 
-    it('should enter a loading state when the `booksLoading` prop is truthy.', 
+    it('should enter a loading state when the `booksLoading` prop is truthy.',
       () => {
         // arrange
         const props = {
             booksLoading: true,
             books: []
-        }
+        };
         const tree = new BookList(props).render();
 
         // assert
@@ -84,18 +84,17 @@ a results message.', () => {
         expect(tree.$('.loading-gif img')).not.toBeNull();
     });
 
-    it('should not enter a loading state when the `booksLoading` prop is falsy.', 
+    it('should not enter a loading state when the `booksLoading` prop is falsy.',
       () => {
         // arrange
         const props = {
             booksLoading: false,
             books: []
-        }
+        };
         const tree = new BookList(props).render();
 
         // assert
         expect(tree.$('.loading-message').textContent).toEqual('');
         expect(tree.$('.loading-message img')).toBeNull();
     });
-
 });

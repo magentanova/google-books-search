@@ -1,5 +1,4 @@
 import store from './store';
-import { exportAllDeclaration } from '@babel/types';
 
 describe('The store', () => {
     it('should invoke any callbacks registered with `.on()` when the \
@@ -27,10 +26,10 @@ is called.', () => {
             const event = 'update';
             store.on(event, func1);
             store.on(event, func2);
-    
+
             // act
-            store.set({a: 1});
-    
+            store.set({ a: 1 });
+
             // assert
             expect(func1).toHaveBeenCalled();
             expect(func2).toHaveBeenCalled();

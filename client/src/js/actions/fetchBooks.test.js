@@ -28,7 +28,8 @@ describe('fetchBooks', () => {
     it('should throw an error if invoked without a query', () => {
         expect(() => fetchBooks()).toThrow();
     });
-    it('should compose a query string that conforms to the Google Books API', async () => {
+    it('should compose a query string that conforms to the Google Books API',
+       async () => {
         // arrange
         mockFetch.resolveWith({
             json: () => mockResponse
@@ -49,7 +50,7 @@ describe('fetchBooks', () => {
         const expectedResponse = {
             ...mockResponse,
             searchEndpoint: `/book-search?q=${query}`
-        }
+        };
 
         // act
         const resp = await fetchBooks(query);
