@@ -1,30 +1,25 @@
 # The Library — An Eighth Light Challenge
 
+
 ## Running locally
 
-### Install dependencies
+  - install dependencies: `npm install`
 
-`npm install`
-
-
-### Start webpack 
-
-`npm run dev` 
-
-
-### Run the server (proxy API & static file server)
-
-`npm run serve`
+  - start webpack file watching: `npm run dev` 
+    
+  - run the server (proxy API & static file server): `npm run serve`
 
 (Note that to develop locally, both webpack and the server should be running at the same time.)
 
 
-### Run the tests
+## Runing tests
 
 `npm run test`
 
+Tests are run using Jest. 
 
-### Make a production build
+
+## Making a production build
 
 `npm run build`
 
