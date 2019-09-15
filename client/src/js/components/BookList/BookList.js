@@ -14,8 +14,8 @@ export default Component({
         if (this.props.booksLoaded) {
             if (this.props.totalBooks) {
                 const numBooks = parseInt(this.props.totalBooks).toLocaleString();
-                resultsMessage = `There are ${numBooks} books that match your search 
-                query. Displaying results 1 - 10.`;
+                resultsMessage = `There are ${numBooks} books that match your search \
+query. Displaying results 1 - 10.`;
             }
             else {
                 resultsMessage = 'No books match your search query.';
