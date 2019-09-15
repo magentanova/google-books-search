@@ -3,12 +3,9 @@ const url = require('url');
 const bookSearchProxy = require('./middleware/bookSearchProxy');
 const staticFileHandler = require('./middleware/staticFileHandler');
 
-// set up bad-express
 const app = function (request, response) {
-    // supercharge request obj
     request.parsedPath = url.parse(request.url);
 
-    // supercharge response obj
     response.sendJSON = (data) => {
         response.setHeader('content-type', 'application/json');
         response.writeHead(200);
@@ -23,30 +20,28 @@ const app = function (request, response) {
     };
 
     let match = false;
-    app.middleware.forEach(obj => {
-        // if a response has already been sent, don't invoke the next middleware
-        if (match) {
-            return;
-        }
+    let handler;
+    app.middleware.forEach(routeOptions => {
+        const routePatterns = routeOptions.pat instanceof Array
+            ? routeOptions.pat
+            : [routeOptions.pat];
 
-        obj.pat = obj.pat instanceof Array ? obj.pat : [obj.pat];
-
-        obj.pat.forEach(pat => {
-            // otherwise, if we match the middleware's corresponding method and
-                // route pattern, invoke the callback
+        routePatterns.forEach(pat => {
             if (request.parsedPath.pathname.match(pat)) {
                 // no method will be interpreted as 'any method'
-                if (!obj.method || obj.method === request.method) {
-                    obj.callback(request, response);
+                if (!routeOptions.method || routeOptions.method === request.method) {
+                    handler = routeOptions.callback;
                     match = true;
                 }
-            }
+            };
         });
     });
 
-    // if the path didn't match anything, send a 400
     if (!match) {
         response.sendError('no such page exists', 400);
+    }
+    else {
+        handler(request, response);
     }
 };
 
