@@ -5,7 +5,7 @@
   "main": "server/server.js",
   "jest": {
     "setupFiles": [
-      "<rootDir>/testUtils/mock.js"
+      "<rootDir>/testUtils/mockFetch.js"
     ]
   },
   "test": {
