@@ -14,20 +14,20 @@ export default Component({
         if (this.props.booksLoaded) {
             if (this.props.totalBooks) {
                 const numBooks = parseInt(this.props.totalBooks).toLocaleString();
-                resultsMessage = `There are ${numBooks} books that match \
-your search query. Displaying results 1 - 10.`;
+                resultsMessage = `There are ${numBooks} books that match your search 
+                query. Displaying results 1 - 10.`;
             }
             else {
                 resultsMessage = 'No books match your search query.';
             }
-        }
+        };
 
         let loadingGif = '';
         let loadingMessage = '';
         if (this.props.booksLoading) {
             loadingGif = '<img alt="loading-gif" src="/static/loader.gif"/>';
             loadingMessage = 'Loading...';
-        }
+        };
 
         return (
             `<div class="results-area">

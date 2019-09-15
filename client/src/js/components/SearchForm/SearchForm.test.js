@@ -6,9 +6,9 @@ describe('The SearchForm component', () => {
         const tree = new SearchForm({error: true}).render();
 
         // assert
-        expect(tree.querySelector('.error-message').innerHTML)
+        expect(tree.$('.error-message').innerHTML)
             .toEqual('Please enter a search term.');
-        expect(tree.querySelector('.search-form .search-input').classList)
+        expect(tree.$('.search-form .search-input').classList)
             .toContain('error');
     });
 
@@ -17,9 +17,9 @@ describe('The SearchForm component', () => {
         const tree = new SearchForm({error: false}).render();
 
         // assert
-        expect(tree.querySelector('.error-message').innerHTML)
+        expect(tree.$('.error-message').innerHTML)
             .toEqual('');
-        expect(tree.querySelector('.search-form .search-input').classList)
+        expect(tree.$('.search-form .search-input').classList)
             .not.toContain('error');
     });
 

@@ -63,7 +63,7 @@ export default createComponent({
             booksLoading: this.props.booksLoading
         };
 
-        this.tree.querySelector('.page-body')
+        this.tree.$('.page-body')
             .appendChild(
                 new SearchForm(searchFormProps).render()
             ).parentNode
