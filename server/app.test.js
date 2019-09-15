@@ -1,6 +1,6 @@
-const request = require("supertest");
+const request = require('supertest');
 
-const app = require("../app");
+const app = require('./app');
 
 const getJSON = url => {
     const httpRequest = request(app).get(url);
@@ -9,23 +9,23 @@ const getJSON = url => {
     return httpRequest;
 };
 
-describe("The proxy api", () => {
-    it("should return a not-found message for an invalid endpoint.", async done => {
+describe('The proxy api', () => {
+    it('should return a not-found message for an invalid endpoint.', async done => {
         // arrange
-        const url = "/schmook-search";
+        const url = '/schmook-search';
         expect.assertions(1);
 
         // act
         const response = await getJSON(url).expect(400);
 
         // assert
-        expect(response.body.message).toEqual("no such page exists");
+        expect(response.body.message).toEqual('no such page exists');
 
         done();
     });
-    it("should return a non-empty result set for a valid query.", async done => {
+    it('should return a non-empty result set for a valid query.', async done => {
         // arrange
-        const url = "/book-search?q=javascript";
+        const url = '/book-search?q=javascript';
         expect.assertions(1);
 
         // act

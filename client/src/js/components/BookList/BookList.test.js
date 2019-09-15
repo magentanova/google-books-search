@@ -10,13 +10,19 @@ met the search criteria.', () => {
             totalItems: 432,
             items: [
                 {
-                    title: 'test-title 1'
+                    volumeInfo: {
+                        title: 'test-title 1'
+                    }
                 },
                 {
-                    title: 'test-title 2'
+                    volumeInfo: {
+                        title: 'test-title 2'
+                    }
                 },
                 {
-                    title: 'test-title 3'
+                    volumeInfo: {
+                        title: 'test-title 3'
+                    }
                 }
             ]
         };
