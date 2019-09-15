@@ -37,20 +37,25 @@ describe('fetchBooks', () => {
         // act
         const resp = await fetchBooks('test-query');
 
-        // asssert
-        expect(resp.searchEndpont).toEqual('/book-search?q=test-query');
+        // assert
+        expect(resp.searchEndpoint).toEqual('/book-search?q=test-query');
     });
     it('should resolve with the response sent from fetch, if valid', async () => {
         // arrange
         mockFetch.resolveWith({
             json: () => mockResponse
         });
+        const query = 'test-query';
+        const expectedResponse = {
+            ...mockResponse,
+            searchEndpoint: `/book-search?q=${query}`
+        }
 
         // act
-        const resp = await fetchBooks('some-query');
+        const resp = await fetchBooks(query);
 
         // assert
-        expect(resp).toEqual(mockResponse);
+        expect(resp).toEqual(expectedResponse);
     });
     it('should reject if the fetch call fails', async () => {
         // arrange
