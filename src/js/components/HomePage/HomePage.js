@@ -1,7 +1,7 @@
-import createComponent from '../lib/createComponent';
+import createComponent from '../../lib/createComponent';
 
-import BookList from './BookList';
-import SearchForm from './SearchForm/SearchForm';
+import BookList from '../BookList/BookList';
+import SearchForm from '../SearchForm/SearchForm';
 
 export default createComponent({
     template () {

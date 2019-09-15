@@ -1,7 +1,7 @@
 import SearchForm from './SearchForm';
 
-describe('the SearchForm component', () => {
-    it('should enter an error state if `error` is received as a prop', () => {
+describe('The SearchForm component', () => {
+    it('should enter an error state if `error` is received as a prop.', () => {
         // arrange 
         const tree = new SearchForm({error: true}).render()
 
@@ -12,7 +12,7 @@ describe('the SearchForm component', () => {
             .toContain('error');
     });
 
-    it('should not enter an error state if `error` is not received as a prop', () => {
+    it('should not enter an error state if `error` is not received as a prop.', () => {
         // arrange 
         const tree = new SearchForm({error: false}).render()
 
@@ -23,7 +23,8 @@ describe('the SearchForm component', () => {
             .not.toContain('error');
     });
 
-    it('should call onInvalidSubmission if the submission is invalid', () => {
+    it('should call its `onInvalidSubmission` prop if the submission is invalid', 
+    () => {
         // arrange 
         const props = {
             onInvalidSubmission: jest.fn()
@@ -36,9 +37,9 @@ describe('the SearchForm component', () => {
         // assert
         expect(props.onInvalidSubmission).toHaveBeenCalled();
     });
-    
-    it('should call onSubmit, and not onInvalidSubmission, \
-if the submission is valid', () => {
+
+    it('should call its `onSubmit` prop, and not onInvalidSubmission, \
+if the submission is valid.', () => {
         // arrange 
         const props = {
             onInvalidSubmission: jest.fn(),

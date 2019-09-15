@@ -9,8 +9,8 @@ const getJSON = url => {
     return httpRequest;
 };
 
-describe("proxy api", () => {
-    it("returns a not-found message for an invalid endpoint", async done => {
+describe("The proxy api", () => {
+    it("should return a not-found message for an invalid endpoint.", async done => {
         // arrange
         const url = "/schmook-search";
         expect.assertions(1);
@@ -23,7 +23,7 @@ describe("proxy api", () => {
 
         done();
     });
-    it("returns a non-empty result set for a valid query", async done => {
+    it("should return a non-empty result set for a valid query.", async done => {
         // arrange
         const url = "/book-search?q=javascript";
         expect.assertions(1);

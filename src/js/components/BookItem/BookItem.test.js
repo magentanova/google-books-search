@@ -1,8 +1,8 @@
 import BookItem from './BookItem';
 
-describe('the BookItem component', () => {
+describe('The BookItem component', () => {
     it('should correctly render the title, authors, publishing company, \
-thumbnail image, and external link for a book', () => {
+thumbnail image, and external link for a book.', () => {
         // arrange 
         const testBook = {
             title: 'test title',
@@ -17,14 +17,13 @@ thumbnail image, and external link for a book', () => {
 
         // assert
         expect(tree.$('.book-title').textContent).toEqual(testBook.title);
-        console.log(tree.$('.book-authors').textContent);
         expect(tree.$('.book-authors').textContent).toEqual('Authors: ' + testBook.authors.join(', '));
         expect(tree.$('.publishing-company').textContent).toEqual('Publisher: ' + testBook.publisher);
         expect(tree.$('.thumbnail img').src).toEqual(testBook.imageLinks.smallThumbnail);        
         expect(tree.$('.learn-more').href).toEqual(testBook.infoLink);        
     });
 
-    it('should render appropriate null values for any missing book props', () => {
+    it('should render appropriate null values for any missing book props.', () => {
         // arrange 
         const testBook = {
             title: 'test title',

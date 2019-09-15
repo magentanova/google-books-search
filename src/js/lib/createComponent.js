@@ -26,6 +26,7 @@ function that returns an html string`);
         render () {
             this.tree = parser.parseFromString(this.template(), 'text/html').body.children[0];
             this.tree.$ = ((sel) => this.tree.querySelector(sel)).bind(this);
+            this.tree.$$ = ((sel) => this.tree.querySelectorAll(sel)).bind(this);
 
             this.assignEventHandlers();
             this.postRender();
