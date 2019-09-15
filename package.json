@@ -21,6 +21,7 @@
     "build": "webpack -p --config client/webpack.config.js",
     "dev": "webpack -w --mode development --config client/webpack.config.js",
     "test": "NODE_ENV=test jest",
+    "start": "node server/server.js",
     "serve": "nodemon server/server.js"
   },
   "repository": {
