@@ -3,6 +3,20 @@
   "version": "1.0.0",
   "description": "A tool for searching the Google Books API",
   "main": "server.js",
+  "jest": {
+    "setupFiles": [
+      "<rootDir>/testUtils/mock.js"
+    ]
+  },
+  "test": {
+    "plugins": [
+      "transform-es2015-modules-commonjs"
+    ],
+    "presets": [
+      "es2015",
+      "stage-0"
+    ]
+  },
   "scripts": {
     "dev": "webpack -w --mode development",
     "test": "NODE_ENV=test jest",
@@ -19,6 +33,8 @@
   },
   "homepage": "https://github.com/magentanova/the-library#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.6.0",
+    "babel-jest": "^24.9.0",
     "eslint": "^6.3.0",
     "eslint-config-standard": "^14.1.0",
     "eslint-plugin-import": "^2.18.2",

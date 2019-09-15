@@ -1,5 +1,7 @@
 import createComponent from '../lib/createComponent';
 
+import fetchBooks from '../actions/fetchBooks';
+
 export default createComponent({
     template () {
         return (

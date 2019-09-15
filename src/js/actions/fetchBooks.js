@@ -2,16 +2,16 @@ import { formatQueryURL } from '../utils';
 import { SEARCH_URL } from '../settings';
 
 export default query => {
-    fetch(formatQueryURL(SEARCH_URL, query))
+    return fetch(formatQueryURL(SEARCH_URL, query))
         .then(
-            resp => resp.json(),
-            err => console.error("error reading response", err)
+            resp => resp.json()
         )
         .then(
-            json =>{
-                clearLoadingState();
-                renderBooksResponse(json);
-            },
-            err => console.error("error reading json", err)
+            json => json
+        )
+        .catch(
+            err => {
+                throw new Error(err);
+            }
         );
-}
+};
